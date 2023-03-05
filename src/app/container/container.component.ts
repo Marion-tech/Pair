@@ -20,17 +20,25 @@ export class ContainerComponent implements OnDestroy {
     if (numInput % 2 === 0) {
       this.subscription.add(
         this.listNumberPair$.subscribe((v: number[]) =>
-          console.log('subject pair: ', v)
+          console.log('subs pair: ', v)
         )
       );
-      this.pair = this.listNumberPair$.next([numInput]);
+      this.pair.push(numInput);
+      this.listNumberPair$.next(this.pair);
+      //this.listNumberPair$.next([numInput]);
+      console.log('subject pair: ', this.listNumberPair$);
+      console.log('array pair:', this.pair);
     } else {
       this.subscription.add(
         this.listNumberImpair$.subscribe((v: number[]) =>
           console.log('subject impair: ', v)
         )
       );
-      this.listNumberImpair$.next(this.listNumberImpair$[numInput]);
+      this.impair.push(numInput);
+      this.listNumberImpair$.next(this.impair);
+      console.log('subject impair : ', this.listNumberImpair$);
+
+      console.log('array impair:', this.impair);
     }
   }
 
