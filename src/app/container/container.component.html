@@ -1,2 +1,13 @@
 number : <input #myinput type="number" />
 <button (click)="analyseInput(myinput)">ok</button>
+
+<h3>Pairs</h3>
+<ul>
+  <li *ngFor="let num of listNumberPair$ | async">{{ num }}</li>
+</ul>
+
+<h3>Impairs</h3>
+<ul>
+  <li *ngFor="let num of listNumberImpair$ | async">{{ num }}</li>
+</ul>
+<div></div>

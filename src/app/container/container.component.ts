@@ -7,10 +7,12 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   styleUrls: ['./container.component.scss'],
 })
 export class ContainerComponent implements OnDestroy {
-  public listNumberPair$: BehaviorSubject<number[]> = new BehaviorSubject([0]);
-  public listNumberImpair$: BehaviorSubject<number[]> = new BehaviorSubject([
-    0,
-  ]);
+  public listNumberPair$: BehaviorSubject<number[]> = new BehaviorSubject<
+    number[]
+  >([]);
+  public listNumberImpair$: BehaviorSubject<number[]> = new BehaviorSubject<
+    number[]
+  >([]);
   public subscription: Subscription = new Subscription();
   public pair: number[] = [];
   public impair: number[] = [];
