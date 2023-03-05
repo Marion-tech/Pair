@@ -6,7 +6,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
 })
-export class ContainerComponent implements OnDestroy {
+export class ContainerComponent {
   public listNumberPair$: BehaviorSubject<number[]> = new BehaviorSubject<
     number[]
   >([]);
@@ -14,37 +14,24 @@ export class ContainerComponent implements OnDestroy {
     number[]
   >([]);
   public subscription: Subscription = new Subscription();
-  public pair: number[] = [];
-  public impair: number[] = [];
 
   public analyseInput(num: HTMLInputElement) {
-    var numInput = num.valueAsNumber;
+    let numInput = num.valueAsNumber;
+    let listPair: number[] = this.listNumberPair$.value;
+    let listImpair: number[] = this.listNumberImpair$.value;
+
     if (numInput % 2 === 0) {
-      this.subscription.add(
-        this.listNumberPair$.subscribe((v: number[]) =>
-          console.log('subs pair: ', v)
-        )
-      );
-      this.pair.push(numInput);
-      this.listNumberPair$.next(this.pair);
+      console.log('value : ', this.listNumberPair$.value[0]);
+      listPair.push(numInput);
+      this.listNumberPair$.next(listPair);
       //this.listNumberPair$.next([numInput]);
       console.log('subject pair: ', this.listNumberPair$);
-      console.log('array pair:', this.pair);
+      console.log('var array pair:', listPair);
     } else {
-      this.subscription.add(
-        this.listNumberImpair$.subscribe((v: number[]) =>
-          console.log('subject impair: ', v)
-        )
-      );
-      this.impair.push(numInput);
-      this.listNumberImpair$.next(this.impair);
+      listImpair.push(numInput);
+      this.listNumberImpair$.next(listImpair);
       console.log('subject impair : ', this.listNumberImpair$);
-
-      console.log('array impair:', this.impair);
+      console.log('var array impair:', listImpair);
     }
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
